@@ -1,0 +1,423 @@
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    h4 {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    .App {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+    }
+
+    .right-sidebar {
+      border-left: 1px solid #ccc;
+      height: 100%;
+    }
+
+    .left-sidebar {
+      border-right: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .side-drawer {
+      background: white;
+      position: fixed;
+      width:60%;
+      max-width: 350px;
+      height: 100%;
+      box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+      top: 0;
+      left: 0;
+      z-index: 100;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-out;
+    }
+    
+    .side-drawer.open {
+      transform: translateX(0);
+    }
+
+    .top-drawer {
+      background: white;
+      position: fixed;
+      width:60%;
+      max-width: 350px;
+      max-height: 50%;
+      box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+      top: 0;
+      left: 20%;
+      z-index: 100;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-out;
+    }
+
+    .top-drawer.open {
+      transform: translateY(0);
+    }
+
+    .add-room {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .user-profile {
+      height: 70px;
+      display: flex;
+      align-items: flex-start;
+      padding-right: 20px;
+      padding-left: 20px;
+      justify-content: space-evenly;
+      flex-direction: column;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .right-sidebar .user-profile {
+      align-items: center;
+    }
+
+    .add-user {
+      height: 30px;
+      margin: 0px;
+      padding: 0px 20px; 
+      border: blue 1px solid;
+      color: darkslateblue;
+      display: flex;
+      line-height: 0px;
+    }
+
+    .user-profile span {
+      display: block;
+    }
+
+    .user-profile .username {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .user-id {
+      color: blueviolet;
+    }
+
+    .chat-rooms li, .room-member {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      font-size: 18px;
+      color: #181919;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 0;
+    }
+
+    .room-member {
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 60px;
+    }
+
+    .rooms {
+      flex-grow: 1;
+    }
+
+    .fa-button {
+      color:rgb(102, 9, 156);
+      cursor: pointer;
+    }
+
+    .backDrop {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 50;
+      top: 0;
+      left: 0;
+    }
+
+    .send-dm {
+      opacity: 0;
+      pointer-events: none;
+      font-size: 20px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      margin-bottom: 0;
+      padding: 0 10px;
+      line-height: 1.4;
+      height: auto;
+    }
+
+    .room-member:hover .send-dm {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .presence {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #ccc;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .presence.online {
+      background-color: green;
+    }
+
+    .chat-rooms .active {
+      background-color: #eee;
+      color: #181919;
+    }
+
+    .chat-rooms li:hover {
+      background-color: #D8D1D1;
+    }
+
+    .room-icon {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .chat-screen {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .chat-header {
+      height: 70px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #ccc;
+      padding: 0px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgb(96, 39, 172);
+      color: white;
+    }
+
+    .chat-header h3 {
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    .chat-heading {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-bottom: 2.5em;
+      margin-top: 75px;
+      overflow: auto;
+      min-height: min-content;
+    }
+
+    .chat-footer {
+      display: block;
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+      background-color: white;
+    }
+
+    .welcome-message {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .message-container {
+      width: 100%;
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: 0px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 90%;
+      margin: 0px 10px;
+      border: blueviolet 1px solid;
+      border-radius: 15px 15px 15px 15px;
+    }
+
+    .user {
+      flex-direction: row-reverse;
+    }
+
+    .message span {
+      display: block;
+      text-align: left;
+    }
+
+    .message-time {
+      margin-left: 10px;
+    }
+
+    .message .user-id {
+      font-weight: bold;
+      color: blue;
+    }
+
+    .message-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #ccc;
+    }
+
+    .message-form, .message-input {
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    input[type="text"].message-input {
+      height: 50px;
+      border: none;
+      padding-left: 20px;
+    }
+
+    .create-room {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0px;
+    }
+
+    /* Dialog
+       ========================================================================== */
+
+    .dialog-container {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content:center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .dialog {
+      width: 500px;
+      background-color: white;
+      display: flex;
+      align-items:  center;
+      z-index: 50;
+    }
+
+    .dialog-form {
+      width: 100%;
+      margin-bottom: 0;
+      padding: 20px;
+    }
+
+    .dialog-form > * {
+      display: block;
+    }
+
+    .username-label {
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .username-input {
+      width: 100%;
+    }
+
+    input[type="text"]:focus {
+      border-color: #5C8436;
+    }
+
+    .btn-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .submit-btn {
+      color: #5C8436;
+      background-color: #181919;
+      width: 100%;
+    }
+
+    .btn-container .submit-btn {
+      color: #5C8436;
+      background-color: #181919;
+      width: 40%;
+    }
+
+    .submit-btn:hover {
+      color: #5C8436;
+      background-color: #222;
+    }
+
+    /* Media Queries
+       ========================================================================== */
+       @media (max-width: 700px) {
+
+        .show-bar {
+          display: none;
+        }
+
+        .chat-header {
+          position: fixed;
+          width: 100%;
+        }
+        .App {
+          display: block;
+          grid-template: none;
+        }
+      }
+
+      @media (min-width: 700px) {
+        .side-drawer {
+          display: none;
+        }
+        .top-drawer {
+          display: none;
+        }
+        .toggle {
+          display: none;
+        }
+      }
