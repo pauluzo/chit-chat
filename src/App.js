@@ -199,7 +199,7 @@ class App extends Component {
               className='fa-button toggle'
               onClick={showLogin ? null : this.drawerClickHandler}
             />
-            <div className='chat-heading' onClick={(showLogin || !currentRoom || currentRoom.customData.isDirectMessage || window.innerWidth > 700) ? null : this.headerClickHandler}>
+            <div className='chat-heading' onClick={(showLogin || !(currentRoom && currentRoom.customData) || currentRoom.customData.isDirectMessage || window.innerWidth > 700) ? null : this.headerClickHandler}>
               { currentRoom ? 
                 <h3>{roomName}</h3> : 
                 <h3>
@@ -246,7 +246,7 @@ class App extends Component {
           </footer>
         </section>
         <div className='show-bar'>{rightBar}</div>
-        { (currentRoom && currentRoom.customData.isDirectMessage) ?
+        { ((currentRoom && currentRoom.customData) && currentRoom.customData.isDirectMessage) ?
           null : 
           <div className={topDrawerOpen ? 'top-drawer open' : 'top-drawer'}>
             {rightBar}
