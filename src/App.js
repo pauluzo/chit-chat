@@ -216,7 +216,8 @@ class App extends Component {
             <p className='welcome-message'>
               Welcome to Chit-Chat app, the easy way to keep in touch with
               friends. Click on the menu button and/or tap on a room to join.
-              You can also create a room and add other user(s) to it.
+              You can also create a room and add other user(s) to it. <br/>
+              Tap on the room name to see room members and who is online.
               <br/> <br/>
               Happy chatting!
             </p>
