@@ -240,7 +240,7 @@
     }
 
     .chat-footer {
-      display: block;
+      display: contents;
       position: fixed;
       bottom: 0px;
       width: 100%;
